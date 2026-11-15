@@ -1,0 +1,1 @@
+uid=1234(user1) gid=1234(user1) euid=0(root) группы=1234(user1),1001(students) контекст=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023

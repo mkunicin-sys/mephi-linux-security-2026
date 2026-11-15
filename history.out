@@ -1,0 +1,459 @@
+    1  whoami
+    2  pwd
+    3  uname -a
+    4  exit
+    5  ps -e -o pid,ruid,uid,comm | awk "NR == 1 || ($2 >= 1000 && $2 <= 60000 && $3 == 0)" | tee ~/mephi-linux-security-2026/processes.out
+    6  [kunitsin@localhost ~]$ ps -e -o pid,ruid,uid,comm | awk "NR == 1 || ($2 >= 1000 && $2 <= 60000 && $3 == 0)" | tee ~/mephi-linux-security-2026/processes.out
+    7  awk: cmd. line:1: NR == 1 || ( >= 1000 &&  <= 60000 &&  == 0)
+    8  awk: cmd. line:1:              ^ syntax error
+    9  awk: cmd. line:2: NR == 1 || ( >= 1000 &&  <= 60000 &&  == 0)
+   10  awk: cmd. line:2:                                            ^ unexpected newline or end of string
+   11  [kunitsin@localhost ~]$ 
+   12  [3~
+   13  [200~[kunitsin@localhost ~]$ ps -e -o pid,ruid,uid,comm | awk "NR == 1 || ($2 >= 1000 && $2 <= 60000 && $3 == 0)" | tee ~/mephi-linux-security-2026/processes.out
+   14  awk: cmd. line:1: NR == 1 || ( >= 1000 &&  <= 60000 &&  == 0)
+   15  awk: cmd. line:1:              ^ syntax error
+   16  awk: cmd. line:2: NR == 1 || ( >= 1000 &&  <= 60000 &&  == 0)
+   17  awk: cmd. line:2:                                            ^ unexpected newline or end of string
+   18  [kunitsin@localhost ~]$ 
+   19  ps -e -o pid,ruid,uid,comm | awk 'NR == 1 || ($2 >= 1000 && $2 <= 60000 && $3 == 0)' | tee ~/mephi-linux-security-2026/processes.out
+   20  history -a
+   21  id user1
+   22  getent group students
+   23  sudo groupadd students
+   24  sudo useradd -m -u 1234 -G students user1
+   25  sudo passwd user1
+   26  sudo chage -M 90 user1
+   27  sudo chage -W 7 user1
+   28  id user1
+   29  sudo chage -l user1
+   30  sudo passwd user1
+   31  mkdir -p ~/mephi-linux-security-2026
+   32  ls -ld ~/mephi-;inux-security-2026
+   33  ls -ld ~/mephi-linux-security-2026
+   34  sudo find / -type f -perm -4000 -print
+   35  sudo find / -type f -perm -4000 -print 2>/dev/null | tee ~/mephi-linux-security-2026/suid-files.out
+   36  cat ~/mephi-linux-security-2026/suid-files.out
+   37  wc -l ~/mephi-linux-security-2026/suid-files.out
+   38  grep '^uid_' /etc/login.defs
+   39  grep '^UID_' /etc/login.defs
+   40  ps -e -o pid,ruid,uid,comm
+   41  ps -e -o pid,ruid,uid,comm | awk 'NR == 1 || ($2 >= 1000 && $2 <= 60000 && $3 == 0)'
+   42  passwd
+   43  cat ~/mephi-linux-security-2026/processes.out
+   44  ls -l ~/mephi-linux-security-2026
+   45  command -v cat
+   46  printf '%\n' 'MEPHI 373187 - SUID TEST' | sudo tee /root/mephi-test.txt
+   47  printf '%s\n' 'MEPHI 373187 - SUID TEST' | sudo tee /root/mephi-test.txt
+   48  sudo chmod 600 /root/mephi-test.txt
+   49  sudo ls -l /root/mephi-test.txt
+   50  sudo cp /usr/bin/cat /home/user1/cat-suid
+   51  sudo chown root:root /home/user1/cat-suid
+   52  sudo chmod 755 /home/user1/cat-suid
+   53  sudo ls -l /home/user1/cat-suid
+   54  su - user1
+   55  stat /home/user1 > ~/stat.out
+   56  sudo stat /home/user1/cat-suid
+   57  ls -l /usr/bin/passwd
+   58  sudo ls -l /etc/shadow
+   59  su user1
+   60  sudo chage -l user1
+   61  sudo cp /usr/bin/passwd /home/user1/passwd-suid
+   62  sudo chown root:root /home/user1/passwd-suid
+   63  sudo stat /home/user1/passwd-suid
+   64  stat /usr/bin/passwd >> ~/stat.out
+   65  sudo chage -l user1 > ~/mephi-linux-security-2026/password-policy.out
+   66  su user1
+   67  ls -lZ /usr/bin/passwd
+   68  sudo ls -lZ /home/user1/passwd-suid
+   69  getenforce
+   70  sudo stat /home/user1/passwd-suid >> ~/stat.out
+   71  ls -lZ /usr/bin/passwd > ~/mephi-linux-security-2026/selinux.out
+   72  sudo ls -lZ /home/user1/passwd-suid >> ~/mephi-linux-security-2026/selinux.out
+   73  getenforce >> ~/mephi-linux-security-2026/selinux.out
+   74  cat ~/mephi-linux-security-2026/selinux.out
+   75  findmnt -T /home/user1
+   76  command -v id
+   77  ls -l /usr/bin/id
+   78  su - user1
+   79  sudo cp /usr/bin/id /home/user1/id-suid
+   80  sudo chown root:root /home/user1/id-suid
+   81  sudo chmod 4755 /home/user1/id-suid
+   82  sudo ls -l /home/user1/id-suid
+   83  su - user1
+   84  sudo stat /home/user1/id-suid >> ~/stat.out
+   85  sudo -u user1 /home/user1/id-suid | tee ~/mephi-linux-security-2026/suid-test.out
+   86  command -v ping
+   87  command -v setcap
+   88  command -v getcap
+   89  ls -l /usr/bin/ping
+   90  getcap /usr/bin/ping
+   91  cat /proc/sys/net/ipv4/ping_group_range
+   92  sudo cp /usr/bin/ping /home/user1/ping-cap
+   93  sudo chown root:root /home/user1/ping-cap
+   94  sudo chmod 755 /home/user1/ping-cap
+   95  sudo ls -l /home/user1/ping-cap
+   96  sudo getcap /home/user1/ping-cap
+   97  su - user1
+   98  sudo setcap cap_net_raw=ep /home/user1/ping-cap
+   99  sudo getcap /home/user1/ping-cap
+  100  sudo ls -l /home/user1/ping-cap
+  101  su - user1
+  102  sudo getcap /home/user1/ping-cap > ~/getcap.out
+  103  sudo stat /home/user1/ping-cap >> ~/stat.out
+  104  sudo -u user1 /home/user1/ping-cap -e 0 -c 3 127.0.0.1 | tee ~/mephi-linux-security-2026/capabilities-test.out
+  105  cat ~/getcap.out
+  106  command -v date
+  107  command -v timedatectl
+  108  command -v visudo
+  109  date
+  110  timedatectl status
+  111  sudo -l -U user1
+  112  sudo visudo -c
+  113  sudo visudo -f /etc/sudoers.d/user1-time
+  114  sudo chmod 440 /etc/sudoers.d/user1-time
+  115  sudo visudo -c
+  116  sudo -l -U user1
+  117  su - user1
+  118  sudo -l -U user1 > ~/mephi-linux-security-2026/sudo-test.out
+  119  sudo cat /etc/sudoers.d/user1-time > ~/mephi-linux-security-2026/sudoers-user1-time
+  120  cat ~/mephi-linux-security-2026/sudoers-user1-time
+  121  history -a
+  122  history -a
+  123  history > ~/history.out
+  124  sudo reboot
+  125  id user1
+  126  sudo chage -l user1
+  127  sudo ls -l /home/user1/id-suid
+  128  sudo -u user1 /home/user1/id-suid
+  129  sudo getcap /home/user1/ping-cap
+  130  sudo -u user1 /home/user1/ping-cap -e 0 -c 3 127.0.0.1
+  131  sudo visudo -c
+  132  sudo -l -U user1
+  133  getenforce
+  134  id user1 > ~/mephi-linux-security-2026/reboot-check.out
+  135  sudo chage -l user1 >> ~/mephi-linux-security-2026/reboot-check.out
+  136  sudo stat /home/user1/id-suid >> ~/mephi-linux-security-2026/reboot-check.out
+  137  sudo -u user1 /home/user1/id-suid >> ~/mephi-linux-security-2026/reboot-check.out
+  138  sudo getcap /home/user1/ping-cap >> ~/mephi-linux-security-2026/reboot-check.out
+  139  sudo -u user1 /home/user1/ping-cap -e 0 -c 3 127.0.0.1 >> ~/mephi-linux-security-2026/reboot-check.out
+  140  sudo -l -U user1 >> ~/mephi-linux-security-2026/reboot-check.out
+  141  getenforce >> ~/mephi-linux-security-2026/reboot-check.out
+  142  cat ~/mephi-linux-security-2026/reboot-check.out
+  143  sudo cp /usr/bin/ping /home/user1/ping-suid
+  144  sudo chown root:root /home/user1/ping-suid
+  145  sudo chmod 755 /home/user1/ping-suid
+  146  sudo ls -l /home/user1/ping-suid
+  147  sudo getcap /home/user1/ping-suid
+  148  sudo -u user1 /home/user1/ping-suid -e 0 -c 3 127.0.0.1
+  149  sudo -u user1 /home/user1/ping-suid -e 0 -c 3 127.0.0.1 2>&1 | tee ~/mephi-linux-security-2026/suid-before.out
+  150  sudo chmod 4755 /home/user1/ping-suid
+  151  sudo ls -l /home/user1/ping-suid
+  152  su - user1
+  153  sudo stat /home/user1/ping-suid >> ~/stat.out
+  154  sudo -u user1 /home/user1/ping-suid -e 0 -c 3 127.0.0.1 2>&1 | tee ~/mephi-linux-security-2026/suid-after.out
+  155  sudo getcap /home/user1/ping-suid
+  156  cp ~/stat.out ~/mephi-linux-security-2026/
+  157  cp ~/getcap.out ~/mephi-linux-security-2026/
+  158  history > ~/history.out
+  159  cp ~/history.out ~/mephi-linux-security-2026/
+  160  ls -lh ~/mephi-linux-security-2026
+  161  sudo chage -l user1 | tee ~/mephi-linux-security-2026/password-policy.out
+  162  wc -c ~/mephi-linux-security-2026/password-policy.out
+  163  cd ~/mephi-linux-security-2026
+  164  mkdir -p etc
+  165  grep '^user1:' /etc/passwd > etc/passwd
+  166  cat etc/passwd
+  167  grep -E '^(students|user1):' /etc/group > etc/group
+  168  cat etc/group
+  169  sudo awk -F: 'BEGIN {OFS=":"} $1 == "user1" {$2="REDACTED"; print}' /etc/shadow >etc/shadow
+  170  cat etc/shadow
+  171  sudo cat /etc/sudoers.d/user1-time > etc/sudoers
+  172  cat etc/sudoers
+  173  ls -l etc
+  174  history -a
+  175  sudo reboot
+  176  sudo la -l /home/user1/ping-suid
+  177  sudo ls -l /home/user1/ping-suid
+  178  sudo -u user1 /home/user1/ping-suid -e 0 -c 3 127.0.0.1
+  179  sudo stat /home/user1/ping-suid >> ~/mephi-linux-security-2026/reboot-check.out
+  180  sudo -u user1 /home/user1/ping-suid -e 0 -c 3 127.0.0.1 >> ~/mephi-linux-security-2026/reboot-check.out
+  181  clear
+  182  echo "MEPHI Linux Security 2026"
+  183  echo "Student ID: 373187"
+  184  whoami
+  185  id user1
+  186  sudo chage -l user1
+  187  sudo ls -l /home/user1/ping-suid
+  188  sudo getcap /home/user1/ping-cap
+  189  sudo -l -U user1
+  190  getenforce
+  191  command -v spectacle
+  192  command -v scrot
+  193  command -v import
+  194  spectacle -b -f -n -o "$HOME/mephi-linux-security-2026/mephi-screenshot.png"
+  195  ls -lh ~/mephi-linux-security-2026/mephi-screenshot.png
+  196  file ~/mephi-linux-security-2026/mephi-screenshot.png
+  197  git --version
+  198  command -v gh
+  199  cd ~/mephi-linux-security-2026
+  200  К заданию извлечения системных конфигурационных файлов. Хеш пароля в файле etc/shadow заменен на REDACTED. Оригинальные хеши паролей не публикуются. Привилегированные учебные копии программ использовались исключительно в учебной виртуальной машине. ## Заключение В ходе работы исследованы механизмы управления пользователями, мониторинга файлов и процессов, set-UID, Linux Capabilities и sudo. На практике подтверждена работоспособность настроенных механизмов безопасности. ## Скриншот ![Результат выполнения задания](mephi-screenshot.png) EOF
+  201  к заданию извлечения системных конфигурационных файлов.
+  202  Хеш пароля в файле etc/shadow заменён на REDACTED.
+  203  Оригинальные хеши паролей не публикуются.
+  204  Привилегированные учебные копии программ используются
+  205  исключительно в учебной виртуальной машине.
+  206  ## Заключение
+  207  В ходе работы изучены механизмы управления
+  208  пользователями, мониторинга файлов и процессов,
+  209  set-UID, Linux Capabilities и sudo.
+  210  Практически подтверждена работоспособность
+  211  настроенных механизмов безопасности.
+  212  ## Скриншот
+  213  EOF
+  214  ls -lh readme.md
+  215  cat > README.md <<'EOF'
+# MEPHI Linux Security 2026
+
+## Исходные данные
+
+- Уникальный номер студента: 373187
+- Операционная система: РЕД ОС 8
+- Ядро Linux: 6.12.92-1.red80.x86_64
+- Архитектура: x86_64
+- Среда виртуализации: Oracle VirtualBox
+- Основной пользователь: kunitsin
+- Учебный пользователь: user1
+- SELinux: Enforcing
+
+## Результаты выполнения задания
+
+| Раздел | Выполненные действия | Результат |
+|---|---|---|
+| 1.1 | Создание пользователя user1 | UID 1234, группа students, срок действия пароля 90 дней |
+| 2.1 | Поиск файлов с set-UID | Обнаружен 31 файл на момент проверки |
+| 2.2 | Мониторинг процессов | Обнаружены fusermount3 и passwd с RUID 1000 и EUID 0 |
+| 3.1 | Выбор утилиты | ping, создание сырого сетевого сокета |
+| 3.2 | Настройка set-UID | ping-suid, права 4755, операция успешна |
+| 4.1 | Выбор привилегии | CAP_NET_RAW |
+| 4.2 | Настройка capabilities | ping-cap, cap_net_raw=ep, операция успешна |
+| 5 | Настройка sudo | Разрешено изменение системного времени |
+| 6 | Сбор артефактов | Результаты сохранены в файлы |
+
+## Раздел 1. Создание пользователя
+
+Созданы группа students и пользователь user1.
+
+Использованные команды:
+
+    sudo groupadd students
+    sudo useradd -m -u 1234 -G students user1
+    sudo passwd user1
+    sudo chage -M 90 user1
+    sudo chage -W 7 user1
+
+Параметры пользователя:
+
+- UID: 1234.
+- Основная группа: user1.
+- Дополнительная группа: students.
+- GID группы students: 1001.
+- Домашний каталог: /home/user1.
+- Максимальный срок действия пароля: 90 дней.
+- Предупреждение о смене пароля: 7 дней.
+
+## Раздел 2. Мониторинг файлов и процессов
+
+### 2.1. Поиск файлов с set-UID
+
+    sudo find / -type f -perm -4000 -print
+
+На момент первоначальной проверки обнаружен 31 файл.
+Некоторые объекты виртуальных файловых систем
+были недоступны для поиска.
+
+Результат сохранён в suid-files.out.
+
+### 2.2. Мониторинг процессов
+
+    ps -e -o pid,ruid,uid,comm | awk 'NR == 1 || ($2 >= 1000 && $2 <= 60000 && $3 == 0)'
+
+Обнаружены следующие процессы:
+
+| PID | RUID | EUID | Команда |
+|---|---|---|---|
+| 1232 | 1000 | 0 | fusermount3 |
+| 2221 | 1000 | 0 | passwd |
+
+Для исследования был запущен процесс смены пароля
+с последующей отменой операции.
+
+Результат сохранён в processes.out.
+
+## Раздел 3. Механизм set-UID
+
+Выбрана утилита ping.
+
+Привилегированная операция — создание сырого
+сетевого сокета для отправки ICMP-запросов
+на локальный адрес 127.0.0.1.
+
+Учебная копия: /home/user1/ping-suid.
+
+Владелец: root:root.
+Права доступа: 4755.
+Файловые capabilities отсутствуют.
+
+До установки set-UID операция была запрещена.
+После установки set-UID операция выполнена
+успешно: отправлено 3 пакета, получено 3,
+потери составили 0%.
+
+Дополнительно исследована утилита id-suid.
+Подтверждено изменение эффективного UID
+с 1234 на 0 при сохранении реального UID 1234.
+
+Артефакты:
+
+- suid-before.out
+- suid-after.out
+- suid-test.out
+- stat.out
+
+## Раздел 4. Linux Capabilities
+
+Выбрана утилита ping.
+Учебная копия: /home/user1/ping-cap.
+
+Назначена отдельная привилегия:
+
+    cap_net_raw=ep
+
+Права доступа: 0755.
+Бит set-UID отсутствует.
+
+До назначения привилегии создание сырого
+сокета завершалось ошибкой.
+После назначения операция выполнена успешно.
+
+Отправлено 3 пакета, получено 3,
+потери составили 0%.
+
+Артефакты:
+
+- getcap.out
+- capabilities-test.out
+- stat.out
+
+## Сравнение set-UID и Capabilities
+
+| Параметр | ping-suid | ping-cap |
+|---|---|---|
+| Права доступа | 4755 | 0755 |
+| set-UID | Да | Нет |
+| Файловые capabilities | Нет | cap_net_raw=ep |
+| Привилегированная операция | Успешно | Успешно |
+| Потери пакетов | 0% | 0% |
+
+Механизм capabilities позволяет предоставлять
+отдельные полномочия вместо широких привилегий root.
+Это соответствует принципу минимальных привилегий.
+
+## Раздел 5. Механизм sudo
+
+Создан файл /etc/sudoers.d/user1-time.
+
+Содержимое правила:
+
+    user1 ALL=(root) /usr/bin/date
+
+Синтаксис конфигурации проверен через visudo.
+
+Результаты эксперимента:
+
+- Изменение времени без sudo запрещено.
+- Изменение времени через sudo выполнено успешно.
+- Код завершения команды: 0.
+- Выполнение /usr/bin/id через sudo запрещено.
+
+Артефакты:
+
+- sudo-test.out
+- sudoers-user1-time
+- etc/sudoers
+
+## Сохранение настроек
+
+Проведена проверка после перезагрузки РЕД ОС.
+
+Подтверждено сохранение пользователя, групп,
+политики паролей, специальных прав доступа,
+capabilities и разрешений sudo.
+
+SELinux оставлен в режиме Enforcing.
+
+Результаты сохранены в reboot-check.out.
+
+## Артефакты проекта
+
+| Файл | Назначение |
+|---|---|
+| mephi-screenshot.png | Скриншот с номером студента |
+| history.out | История команд |
+| stat.out | Права доступа и владельцы файлов |
+| getcap.out | Назначенные capabilities |
+| etc/passwd | Запись учебного пользователя |
+| etc/shadow | Политика паролей без хеша |
+| etc/group | Записи учебных групп |
+| etc/sudoers | Правило sudo для user1 |
+| suid-files.out | Список файлов с set-UID |
+| processes.out | Мониторинг процессов |
+| password-policy.out | Политика смены пароля |
+| suid-before.out | Проверка до установки set-UID |
+| suid-after.out | Проверка после установки set-UID |
+| suid-test.out | Проверка эффективного UID |
+| capabilities-test.out | Проверка capabilities |
+| sudo-test.out | Разрешения sudo |
+| sudoers-user1-time | Созданное правило sudo |
+| selinux.out | Диагностика SELinux |
+| reboot-check.out | Проверка после перезагрузки |
+
+## Безопасность публикации
+
+В публичном репозитории размещены только относящиеся
+к заданию извлечения системных конфигурационных файлов.
+
+Хеш пароля в файле etc/shadow заменён на REDACTED.
+Оригинальные хеши паролей не публикуются.
+
+Привилегированные учебные копии программ используются
+исключительно в учебной виртуальной машине.
+
+## Заключение
+
+В ходе работы изучены механизмы управления
+пользователями, мониторинга файлов и процессов,
+set-UID, Linux Capabilities и sudo.
+
+Практически подтверждена работоспособность
+настроенных механизмов безопасности.
+
+## Скриншот
+
+![Результат выполнения задания](mephi-screenshot.png)
+EOF
+
+  216  ls -lh README.md
+  217  wc -l README.md
+  218  cat README.md
+  219  dnf info gh
+  220  ls -lh README.md
+  221  wc -l README.md
+  222  dnf info gh
+  223  dnf --version
+  224  sudo dnf install 'dnf-command(config-manager)'
+  225  sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+  226  sudo dnf install gh
+  227  gh --version
+  228  history -a
+  229  history > ~/history.out

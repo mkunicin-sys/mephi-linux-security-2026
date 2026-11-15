@@ -1,0 +1,37 @@
+id
+./cat-suid /root/mephi-test.txt
+exit
+test -w /etc/shadow && echo "Запись разрешена" || echo "Запись запрещена"
+passwd
+exit
+whoami
+pwd
+./passwd-suid
+exit
+su - user1
+exit
+id -ru
+id -u
+exit
+id -ru
+id -u
+./id-suid -ru
+./id-suid -u
+./id-suid
+exit
+./ping-cap -c 3 127.0.0.1
+./ping-cap -e 0 -c 3 127.0.0.1
+exit
+id
+./ping-cap -e 0 -c 3 127.0.0.1
+exit
+id
+date -s "$(date '+%Y-%m-%d %H:%M:%S')"
+sudo -v
+sudo /usr/bin/date -s "$(date '+%Y-%m-%d %H:%M:%S')"
+echo $?
+sudo /usr/bin/id
+exit
+id
+./ping-suid -e 0 -c 3 127.0.0.1
+exit

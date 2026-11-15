@@ -1,0 +1,52 @@
+uid=1234(user1) gid=1234(user1) группы=1234(user1),1001(students)
+Последний раз пароль был изменён				: ноя 15, 2026
+Срок действия пароля истекает					: фев 13, 2027
+Пароль будет деактивирован через				: никогда
+Срок действия учётной записи истекает				: никогда
+Минимальное количество дней между сменой пароля			: 0
+Максимальное количество дней между сменой пароля		: 90
+Количество дней с предупреждением перед деактивацией пароля	: 7
+  Файл: /home/user1/id-suid
+  Размер: 40712     	Блоков: 80         Блок В/В: 4096   обычный файл
+Устройство: 8/5	Инода: 261640      Ссылки: 1
+Доступ: (4755/-rwsr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root)
+Контекст: unconfined_u:object_r:user_home_t:s0
+Доступ:        2026-11-15 23:49:06.719916657 +0300
+Модифицирован: 2026-11-15 23:45:37.983218124 +0300
+Изменён:       2026-11-15 23:47:00.490494237 +0300
+Создан:        2026-11-15 23:45:30.300192414 +0300
+uid=1234(user1) gid=1234(user1) euid=0(root) группы=1234(user1),1001(students) контекст=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+/home/user1/ping-cap cap_net_raw=ep
+PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
+64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.014 ms
+64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.020 ms
+64 bytes from 127.0.0.1: icmp_seq=3 ttl=64 time=0.018 ms
+
+--- 127.0.0.1 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2089ms
+rtt min/avg/max/mdev = 0.014/0.017/0.020/0.002 ms
+Соответствие записей Defaults для user1 на localhost:
+    !visiblepw, always_set_home, match_group_by_gid, always_query_group_plugin, env_reset, env_keep="COLORS DISPLAY HOSTNAME HISTSIZE KDEDIR LS_COLORS", env_keep+="MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE",
+    env_keep+="LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES", env_keep+="LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE", env_keep+="LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY",
+    secure_path=/sbin\:/bin\:/usr/sbin\:/usr/bin
+
+Пользователь user1 может выполнять следующие команды на localhost:
+    (root) /usr/bin/date
+Enforcing
+  Файл: /home/user1/ping-suid
+  Размер: 161296    	Блоков: 320        Блок В/В: 4096   обычный файл
+Устройство: 8/5	Инода: 261642      Ссылки: 1
+Доступ: (4755/-rwsr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root)
+Контекст: unconfined_u:object_r:user_home_t:s0
+Доступ:        2026-11-16 01:15:12.282407443 +0300
+Модифицирован: 2026-11-16 01:06:35.616639771 +0300
+Изменён:       2026-11-16 01:13:29.441897113 +0300
+Создан:        2026-11-16 01:06:35.614639867 +0300
+PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
+64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.012 ms
+64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.018 ms
+64 bytes from 127.0.0.1: icmp_seq=3 ttl=64 time=0.019 ms
+
+--- 127.0.0.1 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2164ms
+rtt min/avg/max/mdev = 0.012/0.016/0.019/0.003 ms

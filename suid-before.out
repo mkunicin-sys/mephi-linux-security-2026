@@ -1,0 +1,3 @@
+/home/user1/ping-suid: socktype: SOCK_RAW
+/home/user1/ping-suid: socket: Операция не позволена
+/home/user1/ping-suid: => missing cap_net_raw+p capability or setuid?
